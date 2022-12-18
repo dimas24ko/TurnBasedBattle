@@ -1,0 +1,8 @@
+    {
+      "Player": [
+        ["Archer", "Archer", "Archer"],
+        ["Archer", "Archer", "Archer"]],
+      "Enemy": [
+        ["Archer", "Archer", "Archer"],
+        ["Archer", "Archer", "Archer"]]
+    }
