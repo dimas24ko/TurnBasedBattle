@@ -8,7 +8,7 @@ using UnityEngine;
 using Zenject;
 
 namespace TurnBasedBattle.Scripts.Services.BattleSystem {
-    public class CharactersGenerator {
+    public class CharactersGenerator : IInitializable {
         private readonly JsonDataContainer _jsonDataContainer;
         private readonly CharactersContainer _charactersContainer;
         private readonly ICharacterFactory _characterFactory;
@@ -23,6 +23,9 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem {
             _charactersContainer = charactersContainer;
             _characterFactory = characterFactory;
         }
+
+        public void Initialize() =>
+            Execute();
 
         private void Execute() {
             GetData();

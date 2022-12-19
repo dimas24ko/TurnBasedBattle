@@ -5,22 +5,21 @@ using Zenject;
 namespace TurnBasedBattle.Scripts.Services.BattleSystem.CharactersData
 {
     public class CharactersDataContainer: IInitializable {
-        public Dictionary<CharacterType, CharacterData> CharactersDataMap;
+        private Dictionary<CharacterType, CharacterData> _charactersDataMap;
 
         private JsonDataContainer _jsonDataContainer;
 
         [Inject]
-        public CharactersDataContainer(JsonDataContainer jsonDataContainer) {
+        public CharactersDataContainer(JsonDataContainer jsonDataContainer) =>
             _jsonDataContainer = jsonDataContainer;
-        }
 
         public CharacterData GetDataByType(CharacterType type) {
-            return CharactersDataMap[type];
+            return _charactersDataMap.ContainsKey(type)
+                ? _charactersDataMap[type]
+                : new CharacterData();
         }
 
-        public void Initialize() {
-            CharactersDataMap =
-                JsonConvert.DeserializeObject<Dictionary<CharacterType, CharacterData>>(_jsonDataContainer.CharactersSettings.text);
-        }
+        public void Initialize() =>
+            _charactersDataMap = JsonConvert.DeserializeObject<Dictionary<CharacterType, CharacterData>>(_jsonDataContainer.CharactersSettings.text);
     }
 }

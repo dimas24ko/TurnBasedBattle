@@ -17,7 +17,7 @@ namespace TurnBasedBattle.Scripts.Installers {
             Container.Bind<CharactersContainer>().AsSingle();
             Container.BindInterfacesTo<CharactersDataContainer>().AsSingle();
             Container.BindInterfacesTo<SimpleCharacterFactory>().AsSingle();
-            Container.Bind<CharactersGenerator>().AsSingle();
+            Container.BindInterfacesTo<CharactersGenerator>().AsSingle();
         }
 
         private void InstallCommonData() {
