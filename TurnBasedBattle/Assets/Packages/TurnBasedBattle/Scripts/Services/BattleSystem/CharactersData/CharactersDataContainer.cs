@@ -9,7 +9,7 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.CharactersData
     public class CharactersDataContainer: IInitializable {
         private Dictionary<CharacterType, CharacterData> _charactersDataMap;
 
-        private JsonDataContainer _jsonDataContainer;
+        private readonly JsonDataContainer _jsonDataContainer;
 
         [Inject]
         public CharactersDataContainer(JsonDataContainer jsonDataContainer) =>

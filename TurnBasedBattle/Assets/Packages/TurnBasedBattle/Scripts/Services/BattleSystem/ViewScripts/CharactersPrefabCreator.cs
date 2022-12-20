@@ -6,7 +6,6 @@ using TurnBasedBattle.Scripts.Services.BattleSystem.CharactersInterfaces;
 using TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts.ViewData;
 using UnityEngine;
 using Zenject;
-using Random = UnityEngine.Random;
 
 namespace TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts {
     public class CharactersPrefabCreator : MonoBehaviour {

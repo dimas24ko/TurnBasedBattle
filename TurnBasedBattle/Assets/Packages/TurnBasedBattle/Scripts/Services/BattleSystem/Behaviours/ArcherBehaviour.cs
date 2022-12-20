@@ -8,7 +8,7 @@ using UnityEngine;
 namespace TurnBasedBattle.Scripts.Services.BattleSystem.Behaviours {
     public class ArcherBehaviour : ICharacter, ISingleShootCharacter, IUltAbilityCharacter<List<CharactersLine>>{
 
-        public float Health { get; set; }
+        public float Health { get; private set; }
 
         public CharacterType Type => CharacterType.Archer;
 
@@ -16,9 +16,9 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.Behaviours {
 
         public GameObject CharacterPrefab { get; set; }
 
-        public float DamageValue { get; set; }
+        public float DamageValue { get; }
 
-        public float UltDamageValue { get; set; }
+        public float UltDamageValue { get; }
 
         private const float NeededUltPoints = 20;
         private float _currentUltPoints;
@@ -29,18 +29,19 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.Behaviours {
         public event Action OnUltUsed;
         public Action OnUltReady;
 
-        public ArcherBehaviour(float health, string characterPrefabName, float damageValue, float ultDamageValue) {
+        public ArcherBehaviour(float health, string characterPrefabName, float damageValue, float ultDamageValue, GameObject characterPrefab = null) {
             Health = health;
             CharacterPrefabName = characterPrefabName;
             DamageValue = damageValue;
             UltDamageValue = ultDamageValue;
+            CharacterPrefab = characterPrefab;
         }
 
         public void SetHealth(float health) {
             Health -= health;
             OnHealthChanged?.Invoke(Health);
 
-            if (Health<=0) {
+            if (Health <= 0) {
                 Died();
             }
         }

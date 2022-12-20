@@ -64,13 +64,6 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.Generations {
         }
 
         private void GetData() =>
-            _playerTypeLinesMap =
-                JsonConvert.DeserializeObject<Dictionary<PlayerType, List<List<CharacterType>>>>(_jsonDataContainer
-                    .CharactersLinesMap.text);
-    }
-
-    public enum PlayerType {
-        Player,
-        Enemy,
+            _playerTypeLinesMap = JsonConvert.DeserializeObject<Dictionary<PlayerType, List<List<CharacterType>>>>(_jsonDataContainer.CharactersLinesMap.text);
     }
 }

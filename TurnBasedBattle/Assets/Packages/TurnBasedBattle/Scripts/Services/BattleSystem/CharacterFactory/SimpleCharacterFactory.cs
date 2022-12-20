@@ -7,7 +7,7 @@ using Zenject;
 namespace TurnBasedBattle.Scripts.Services.BattleSystem.CharacterFactory
 {
     public class SimpleCharacterFactory : ICharacterFactory {
-        private CharactersDataContainer _characterDataContainer;
+        private readonly CharactersDataContainer _characterDataContainer;
 
         [Inject]
         public SimpleCharacterFactory(CharactersDataContainer characterDataContainer) =>

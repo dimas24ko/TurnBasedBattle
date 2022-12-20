@@ -6,11 +6,11 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.CharactersInterfaces
 {
     public interface ICharacter {
 
-        public float Health { get; set; }
+        public float Health { get; }
 
         public CharacterType Type { get;}
 
-        public string CharacterPrefabName { get; set; }
+        public string CharacterPrefabName { get; }
 
         public GameObject CharacterPrefab{ get; set; }
 

@@ -9,7 +9,7 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.UI {
         private Dictionary<CharacterType, CharacterPanel> CharactersPanelsMap = new Dictionary<CharacterType, CharacterPanel>();
 
         private void Awake() =>
-            CharactersPanelsMap.Add(CharacterType.Archer, ArcherPanel); // Redev on normal serializations dictionary with Odin
+            CharactersPanelsMap.Add(CharacterType.Archer, ArcherPanel); // TODO Redev on normal serializations dictionary with Odin
 
         public void ShowPanel(CharacterType characterType, bool ultButtonActive = false) =>
             CharactersPanelsMap[characterType].Open(ultButtonActive);

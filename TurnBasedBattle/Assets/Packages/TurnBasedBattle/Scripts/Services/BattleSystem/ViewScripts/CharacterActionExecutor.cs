@@ -8,7 +8,7 @@ using UnityEngine;
 using Zenject;
 
 namespace TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts {
-    public class CharacterActionExecutor : MonoBehaviour {
+    public class CharacterActionExecutor : MonoBehaviour {//TODO redev on stateMachine, but i dont khow how do it
         public CharacterInfoContainer CharacterInfoContainer;
         public CharactersPanelsSwitcher CharactersPanelsSwitcher;
         public CharactersPrefabCreator CharactersPrefabCreator;
@@ -110,7 +110,7 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts {
             CharactersPanelsSwitcher.ShowPanel(FirstCharacter.character.Type, FirstCharacter.IsUltReady);
         }
 
-        private void SetSecondCharacter(CharacterInfo characterInfo) {//TODO redev on stateMachine, but i dont khow how do it
+        private void SetSecondCharacter(CharacterInfo characterInfo) {
             SecondCharacter = characterInfo;
 
             ExecuteSimpleShoot();
@@ -177,16 +177,5 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts {
                 characterInfo.IsSelectable = true;
             }
         }
-
-        private void SetSideCharactersUnSelectable(List<CharacterInfo> sideCharacters) {
-            foreach (CharacterInfo characterInfo in sideCharacters) {
-                characterInfo.IsSelectable = false;
-            }
-        }
-    }
-
-    public enum ActionType {
-        Shoot,
-        Ult,
     }
 }

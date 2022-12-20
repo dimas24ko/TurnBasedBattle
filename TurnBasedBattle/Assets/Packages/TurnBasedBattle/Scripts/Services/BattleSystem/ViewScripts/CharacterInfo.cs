@@ -27,6 +27,9 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts {
             SubscribeOnCharacterType();
         }
 
+        private void OnMouseDown() =>
+            Select();
+
         public void SetUltFalse() =>
             IsUltReady = false;
 
@@ -51,9 +54,6 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts {
 
         private void DestroyCharacter() =>
             Animator.DiedAnimation();
-
-        private void OnMouseDown() =>
-            Select();
 
         private void ChangeHealth(float newValue) =>
             HealthValue.text = newValue.ToString();
