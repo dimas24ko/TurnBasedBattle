@@ -19,6 +19,7 @@ namespace TurnBasedBattle.Scripts.Services {
         public CharacterInfo SecondCharacter;
 
         private CharactersContainer _charactersContainer;
+        private ActionType? _cachedType;
 
         private bool _isPlayerTurn;
 
@@ -30,6 +31,15 @@ namespace TurnBasedBattle.Scripts.Services {
             CharactersPrefabCreator.OnPrefabsCreated += NewTurn;
 
         public void NewTurn() {
+            CharactersPanelsSwitcher.HideAllPanels();
+
+            if (_isPlayerTurn) {
+                UnSubscribeOnTurn(CharacterInfoContainer.PlayerCharacters, CharacterInfoContainer.EnemyCharacters);
+            }
+            else {
+                UnSubscribeOnTurn(CharacterInfoContainer.EnemyCharacters, CharacterInfoContainer.PlayerCharacters);
+            }
+
             _isPlayerTurn = !_isPlayerTurn;
 
             if (_isPlayerTurn) {
@@ -42,9 +52,17 @@ namespace TurnBasedBattle.Scripts.Services {
             SetSideCharactersSelectable(_isPlayerTurn
                 ? CharacterInfoContainer.PlayerCharacters
                 : CharacterInfoContainer.EnemyCharacters);
+
+            _cachedType = null;
+            FirstCharacter = null;
+            SecondCharacter = null;
         }
 
         public void SetActionType(ActionType type) {
+            if (FirstCharacter == null) {
+                return;
+            }
+
             switch (type) {
                 case ActionType.Shoot:
                     SetupSimpleShoot();
@@ -57,16 +75,30 @@ namespace TurnBasedBattle.Scripts.Services {
             }
         }
 
+        private void UnSubscribeOnTurn(List<CharacterInfo> shootingPlayer, List<CharacterInfo> targetPlayer) {
+            foreach (CharacterInfo characterInfo in shootingPlayer)
+            {
+                characterInfo.OnCharacterSelected -= SetFirstCharacter;
+            }
+
+            foreach (CharacterInfo characterInfo in targetPlayer)
+            {
+                characterInfo.OnCharacterSelected -= SetSecondCharacter;
+            }
+        }
+
         private void SubscribeOnNewTurn(List<CharacterInfo> shootingPlayer, List<CharacterInfo> targetPlayer)
         {
             foreach (CharacterInfo characterInfo in shootingPlayer)
             {
                 characterInfo.OnCharacterSelected += SetFirstCharacter;
+                characterInfo.IsUsedInTurn = false;
             }
 
             foreach (CharacterInfo characterInfo in targetPlayer)
             {
                 characterInfo.OnCharacterSelected += SetSecondCharacter;
+                characterInfo.IsUsedInTurn = false;
             }
         }
 
@@ -87,6 +119,10 @@ namespace TurnBasedBattle.Scripts.Services {
         }
 
         private void ExecuteSimpleShoot() {
+            if (FirstCharacter == null || FirstCharacter.IsUsedInTurn) {
+                return;
+            }
+
             switch (FirstCharacter.character.Type) {
                 case CharacterType.Archer:
                     var character = (ArcherBehaviour)FirstCharacter.character;
@@ -115,7 +151,7 @@ namespace TurnBasedBattle.Scripts.Services {
                 : CharacterInfoContainer.PlayerCharacters);
 
         private void ExecuteUlt(List<CharactersLine> ultTargets) {
-            switch (FirstCharacter.character.Type) {
+           switch (FirstCharacter.character.Type) {
                 case CharacterType.Archer:
                     var character = (ArcherBehaviour)FirstCharacter.character;
                     character.UseUlt(ultTargets);
@@ -141,6 +177,12 @@ namespace TurnBasedBattle.Scripts.Services {
         private void SetSideCharactersSelectable(List<CharacterInfo> sideCharacters) {
             foreach (CharacterInfo characterInfo in sideCharacters) {
                 characterInfo.IsSelectable = true;
+            }
+        }
+
+        private void SetSideCharactersUnSelectable(List<CharacterInfo> sideCharacters) {
+            foreach (CharacterInfo characterInfo in sideCharacters) {
+                characterInfo.IsSelectable = false;
             }
         }
     }

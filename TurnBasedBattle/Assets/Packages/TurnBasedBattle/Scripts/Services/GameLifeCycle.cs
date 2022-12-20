@@ -42,9 +42,9 @@ namespace TurnBasedBattle.Scripts.Services {
                 if (line.CharactersInLine.Count != 0) {
                     return;
                 }
-
-                Win?.Invoke();
             }
+
+            Win?.Invoke();
         }
 
         private void CheckLose(ICharacter character) {
@@ -54,9 +54,9 @@ namespace TurnBasedBattle.Scripts.Services {
                 if (line.CharactersInLine.Count != 0) {
                     return;
                 }
-
-                Lose?.Invoke();
             }
+
+            Lose?.Invoke();
         }
     }
 }

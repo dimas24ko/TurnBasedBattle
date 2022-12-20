@@ -2,8 +2,8 @@
   "Archer": {
     "Health": 50.0,
     "PrefabName":  "Archer",
-    "DamageValue": 50.0,
-    "UltDamageValue": 50.0
+    "DamageValue": 25.0,
+    "UltDamageValue": 15.0
   }
 
 }

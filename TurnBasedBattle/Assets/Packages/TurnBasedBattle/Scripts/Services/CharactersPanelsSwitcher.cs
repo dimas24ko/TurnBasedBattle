@@ -17,5 +17,11 @@ namespace TurnBasedBattle.Scripts.Services {
 
         public void HidePanel(CharacterType characterType) =>
             CharactersPanelsMap[characterType].Hide();
+
+        public void HideAllPanels() {
+            foreach (CharacterPanel panel in CharactersPanelsMap.Values) {
+                panel.Hide();
+            }
+        }
     }
 }

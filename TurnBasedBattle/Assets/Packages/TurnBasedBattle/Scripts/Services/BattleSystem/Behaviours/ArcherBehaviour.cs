@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TurnBasedBattle.Scripts.Services.BattleSystem.CharactersData;
 using TurnBasedBattle.Scripts.Services.BattleSystem.CharactersInterfaces;
 using UnityEngine;
@@ -62,7 +63,7 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.Behaviours {
             _currentUltPoints = 0;
 
             foreach (CharactersLine line in value) {
-                foreach (ICharacter character in line.CharactersInLine) {
+                foreach (ICharacter character in line.CharactersInLine.ToList()) {
                     character?.SetHealth(UltDamageValue);
                 }
             }

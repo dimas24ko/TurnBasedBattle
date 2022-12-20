@@ -1219,7 +1219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterActionExecutor: {fileID: 2096874378}
-  Type: 0
+  Type: 1
 --- !u!1 &1195264906
 GameObject:
   m_ObjectHideFlags: 0
