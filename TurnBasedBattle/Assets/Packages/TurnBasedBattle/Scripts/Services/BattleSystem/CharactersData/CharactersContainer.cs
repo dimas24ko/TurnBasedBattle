@@ -6,8 +6,8 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.CharactersData {
         public List<CharactersLine> PlayerCharactersLines => playerCharactersLines;
         public List<CharactersLine> EnemyCharactersLines => enemyCharactersLines;
 
-        private List<CharactersLine> playerCharactersLines;
-        private List<CharactersLine> enemyCharactersLines;
+        private List<CharactersLine> playerCharactersLines = new List<CharactersLine>();
+        private List<CharactersLine> enemyCharactersLines = new List<CharactersLine>();
 
         public void AddCharacterToPLayerCharacters(ICharacter character, int lineIndex) =>
             AddCharacterToLine(character, lineIndex, playerCharactersLines);
@@ -15,11 +15,11 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.CharactersData {
         public void AddCharacterToEnemyCharacters(ICharacter character, int lineIndex) =>
             AddCharacterToLine(character, lineIndex, enemyCharactersLines);
 
-        public void DeleteCharacterToPLayerCharacters(ICharacter character, int lineIndex) =>
-            DeleteCharacterInLine(character, lineIndex, playerCharactersLines);
+        public void DeletePLayerCharacter(ICharacter character) =>
+            DeleteCharacter(character, playerCharactersLines);
 
-        public void DeleteCharacterToEnemyCharacters(ICharacter character, int lineIndex) =>
-            DeleteCharacterInLine(character, lineIndex, enemyCharactersLines);
+        public void DeleteEnemyCharacter(ICharacter character) =>
+            DeleteCharacter(character, enemyCharactersLines);
 
         public List<ICharacter> GetPlayerCharactersByLineIndex(int lineIndex) =>
             GetCharactersInLine(playerCharactersLines, lineIndex);
@@ -30,22 +30,20 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.CharactersData {
         private List<ICharacter> GetCharactersInLine(IReadOnlyList<CharactersLine> charactersLines, int lineIndex) =>
             charactersLines[lineIndex]?.CharactersInLine;
 
-        private void DeleteCharacterInLine(ICharacter character, int lineIndex, IList<CharactersLine> charactersLines) {
-            if (charactersLines.Count <= lineIndex) {
-                for (int i = 0; i < lineIndex - charactersLines.Count; i++) {
-                    charactersLines.Remove(new CharactersLine());
+        private void DeleteCharacter(ICharacter character, List<CharactersLine> charactersLines) {
+            foreach (CharactersLine line in charactersLines) {
+                foreach (ICharacter characterInLine in line.CharactersInLine) {
+                    if (characterInLine == character) {
+                        line.CharactersInLine.Remove(characterInLine);
+                        return;
+                    }
                 }
-
-                charactersLines[lineIndex]?.CharactersInLine.Remove(character);
-            }
-            else {
-                charactersLines[lineIndex].CharactersInLine.Remove(character);
             }
         }
 
         private void AddCharacterToLine(ICharacter character, int lineIndex, IList<CharactersLine> charactersLines) {
             if (charactersLines.Count <= lineIndex) {
-                for (int i = 0; i < lineIndex - charactersLines.Count; i++) {
+                for (int i = 0; i < lineIndex - charactersLines.Count + 1; i++) {
                     charactersLines.Add(new CharactersLine());
                 }
 

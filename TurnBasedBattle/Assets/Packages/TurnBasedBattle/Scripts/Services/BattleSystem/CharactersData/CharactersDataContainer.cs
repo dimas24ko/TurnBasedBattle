@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using UnityEngine;
 using Zenject;
 
 namespace TurnBasedBattle.Scripts.Services.BattleSystem.CharactersData

@@ -4,6 +4,6 @@ using TurnBasedBattle.Scripts.Services.BattleSystem.CharactersInterfaces;
 namespace TurnBasedBattle.Scripts.Services.BattleSystem.CharactersData
 {
     public class CharactersLine {
-        public List<ICharacter> CharactersInLine;
+        public List<ICharacter> CharactersInLine = new List<ICharacter>();
     }
 }

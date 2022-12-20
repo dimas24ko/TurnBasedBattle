@@ -11,13 +11,26 @@ namespace TurnBasedBattle.Scripts.Installers {
         public override void InstallBindings() {
             InstallCommonData();
             InstallCharactersData();
+            InstallPrefabLoader();
+
+            InstallSceneSwitcher();
+            InstallLifeCycle();
         }
+
+        private void InstallLifeCycle() =>
+            Container.Bind<GameLifeCycle>().AsSingle();
+
+        private void InstallSceneSwitcher() =>
+            Container.Bind<SceneSwitcher>().AsSingle();
+
+        private void InstallPrefabLoader() =>
+            Container.Bind<PrefabLoader>().AsSingle();
 
         private void InstallCharactersData() {
             Container.Bind<CharactersContainer>().AsSingle();
-            Container.BindInterfacesTo<CharactersDataContainer>().AsSingle();
-            Container.BindInterfacesTo<SimpleCharacterFactory>().AsSingle();
-            Container.BindInterfacesTo<CharactersGenerator>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CharactersDataContainer>().AsSingle();
+            Container.BindInterfacesAndSelfTo<SimpleCharacterFactory>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CharactersGenerator>().AsSingle();
         }
 
         private void InstallCommonData() {

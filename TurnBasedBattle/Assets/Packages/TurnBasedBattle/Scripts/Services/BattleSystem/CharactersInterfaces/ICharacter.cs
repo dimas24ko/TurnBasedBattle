@@ -1,5 +1,6 @@
 using System;
 using TurnBasedBattle.Scripts.Services.BattleSystem.CharactersData;
+using UnityEngine;
 
 namespace TurnBasedBattle.Scripts.Services.BattleSystem.CharactersInterfaces
 {
@@ -11,7 +12,10 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.CharactersInterfaces
 
         public string CharacterPrefabName { get; set; }
 
+        public GameObject CharacterPrefab{ get; set; }
+
         public event Action OnDied;
+        public event Action<float> OnHealthChanged;
 
         public void SetHealth(float health);
 
