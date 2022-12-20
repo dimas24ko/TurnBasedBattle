@@ -1,15 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using DG.Tweening;
 using TurnBasedBattle.Scripts.Services.BattleSystem.Behaviours;
 using TurnBasedBattle.Scripts.Services.BattleSystem.CharactersData;
-using TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts;
+using TurnBasedBattle.Scripts.Services.BattleSystem.UI;
+using TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts.ViewData;
 using UnityEngine;
 using Zenject;
-using CharacterInfo = TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts.CharacterInfo;
 
-namespace TurnBasedBattle.Scripts.Services {
+namespace TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts {
     public class CharacterActionExecutor : MonoBehaviour {
         public CharacterInfoContainer CharacterInfoContainer;
         public CharactersPanelsSwitcher CharactersPanelsSwitcher;

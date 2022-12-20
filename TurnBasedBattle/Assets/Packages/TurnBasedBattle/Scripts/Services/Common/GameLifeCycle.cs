@@ -1,11 +1,10 @@
 using System;
-using TurnBasedBattle.Scripts.Services.BattleSystem;
 using TurnBasedBattle.Scripts.Services.BattleSystem.CharactersData;
 using TurnBasedBattle.Scripts.Services.BattleSystem.CharactersInterfaces;
-using UnityEngine;
+using TurnBasedBattle.Scripts.Services.BattleSystem.Generations;
 using Zenject;
 
-namespace TurnBasedBattle.Scripts.Services {
+namespace TurnBasedBattle.Scripts.Services.Common {
     public class GameLifeCycle {
         private CharactersContainer _charactersContainer;
         private CharactersGenerator _charactersGenerator;

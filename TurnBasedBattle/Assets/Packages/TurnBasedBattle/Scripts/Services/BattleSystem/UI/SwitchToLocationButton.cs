@@ -1,7 +1,8 @@
+using TurnBasedBattle.Scripts.Services.Common;
 using UnityEngine;
 using Zenject;
 
-namespace TurnBasedBattle.Scripts.Services.BattleSystem {
+namespace TurnBasedBattle.Scripts.Services.BattleSystem.UI {
     public class SwitchToLocationButton : MonoBehaviour {
         private SceneSwitcher _sceneSwitcher;
 

@@ -4,10 +4,10 @@ using Newtonsoft.Json;
 using TurnBasedBattle.Scripts.Services.BattleSystem.CharacterFactory;
 using TurnBasedBattle.Scripts.Services.BattleSystem.CharactersData;
 using TurnBasedBattle.Scripts.Services.BattleSystem.CharactersInterfaces;
-using UnityEngine;
+using TurnBasedBattle.Scripts.Services.Common;
 using Zenject;
 
-namespace TurnBasedBattle.Scripts.Services.BattleSystem {
+namespace TurnBasedBattle.Scripts.Services.BattleSystem.Generations {
     public class CharactersGenerator : IInitializable {
         private readonly JsonDataContainer _jsonDataContainer;
         private readonly CharactersContainer _charactersContainer;
@@ -63,12 +63,10 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem {
             }
         }
 
-        private void GetData()
-        {
+        private void GetData() =>
             _playerTypeLinesMap =
                 JsonConvert.DeserializeObject<Dictionary<PlayerType, List<List<CharacterType>>>>(_jsonDataContainer
                     .CharactersLinesMap.text);
-        }
     }
 
     public enum PlayerType {

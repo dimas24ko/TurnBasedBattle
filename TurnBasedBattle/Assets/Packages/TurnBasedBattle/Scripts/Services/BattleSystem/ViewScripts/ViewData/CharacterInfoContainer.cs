@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts
+namespace TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts.ViewData
 {
     public class CharacterInfoContainer : MonoBehaviour {
         public CharactersPrefabCreator CharactersPrefabCreator;

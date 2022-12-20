@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TurnBasedBattle.Scripts.Services.BattleSystem.CharactersData;
 using TurnBasedBattle.Scripts.Services.BattleSystem.CharactersInterfaces;
+using TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts.ViewData;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -11,7 +12,7 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts {
     public class CharactersPrefabCreator : MonoBehaviour {
         public CharacterInfoContainer CharacterInfoContainer;
 
-        private PrefabLoader _prefabLoader;
+        private PrefabLoader.PrefabLoader _prefabLoader;
         private CharactersContainer _charactersContainer;
 
         public float firstLineXOffset;
@@ -24,7 +25,7 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts {
         public Action OnPrefabsCreated;
 
         [Inject]
-        public void Construct(PrefabLoader prefabLoader, CharactersContainer charactersContainer) {
+        public void Construct(PrefabLoader.PrefabLoader prefabLoader, CharactersContainer charactersContainer) {
             _prefabLoader = prefabLoader;
             _charactersContainer = charactersContainer;
         }

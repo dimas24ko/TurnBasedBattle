@@ -1,8 +1,7 @@
-using System.Runtime.InteropServices;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace TurnBasedBattle.Scripts.Services {
+namespace TurnBasedBattle.Scripts.Services.Common {
     public class SceneSwitcher {
         private const string LobbySceneName = "Lobby";
         private const string GameSceneName = "Game";

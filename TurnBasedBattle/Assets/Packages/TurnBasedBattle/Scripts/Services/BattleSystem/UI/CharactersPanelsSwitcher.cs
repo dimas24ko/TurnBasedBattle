@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using TurnBasedBattle.Scripts.Services.BattleSystem.CharactersData;
 using UnityEngine;
 
-namespace TurnBasedBattle.Scripts.Services {
+namespace TurnBasedBattle.Scripts.Services.BattleSystem.UI {
     public class CharactersPanelsSwitcher : MonoBehaviour {
         public CharacterPanel ArcherPanel;
 
