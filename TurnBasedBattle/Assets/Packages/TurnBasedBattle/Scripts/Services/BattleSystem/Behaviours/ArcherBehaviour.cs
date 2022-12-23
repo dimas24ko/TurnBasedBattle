@@ -38,12 +38,15 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.Behaviours {
         }
 
         public void SetHealth(float health) {
-            Health -= health;
-            OnHealthChanged?.Invoke(Health);
-
-            if (Health <= 0) {
+            if (Health - health <= 0) {
                 Died();
+                Health = 0;
             }
+            else {
+                Health -= health;
+            }
+
+            OnHealthChanged?.Invoke(Health);
         }
 
         public void Died() =>

@@ -26,34 +26,12 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts {
             _charactersContainer = charactersContainer;
 
         private void Awake() =>
-            CharactersPrefabCreator.OnPrefabsCreated += NewTurn;
+            CharactersPrefabCreator.OnPrefabsCreated += PrepareNewTurn;
 
-        public void NewTurn() {
-            CharactersPanelsSwitcher.HideAllPanels();
+        public void PrepareNewTurn() {
+            ClearLastTurnActions();
 
-            if (_isPlayerTurn) {
-                UnSubscribeOnTurn(CharacterInfoContainer.PlayerCharacters, CharacterInfoContainer.EnemyCharacters);
-            }
-            else {
-                UnSubscribeOnTurn(CharacterInfoContainer.EnemyCharacters, CharacterInfoContainer.PlayerCharacters);
-            }
-
-            _isPlayerTurn = !_isPlayerTurn;
-
-            if (_isPlayerTurn) {
-                SubscribeOnNewTurn(CharacterInfoContainer.PlayerCharacters, CharacterInfoContainer.EnemyCharacters);
-            }
-            else {
-                SubscribeOnNewTurn(CharacterInfoContainer.EnemyCharacters, CharacterInfoContainer.PlayerCharacters);
-            }
-
-            SetSideCharactersSelectable(_isPlayerTurn
-                ? CharacterInfoContainer.PlayerCharacters
-                : CharacterInfoContainer.EnemyCharacters);
-
-            _cachedType = null;
-            FirstCharacter = null;
-            SecondCharacter = null;
+            SetupNewTurn();
         }
 
         public void SetActionType(ActionType type) {
@@ -71,6 +49,42 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts {
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
+        }
+
+        private void SetupNewTurn()
+        {
+            if (_isPlayerTurn)
+            {
+                SubscribeOnNewTurn(CharacterInfoContainer.PlayerCharacters, CharacterInfoContainer.EnemyCharacters);
+            }
+            else
+            {
+                SubscribeOnNewTurn(CharacterInfoContainer.EnemyCharacters, CharacterInfoContainer.PlayerCharacters);
+            }
+
+            SetSideCharactersSelectable(_isPlayerTurn
+                ? CharacterInfoContainer.PlayerCharacters
+                : CharacterInfoContainer.EnemyCharacters);
+
+            _cachedType = null;
+            FirstCharacter = null;
+            SecondCharacter = null;
+        }
+
+        private void ClearLastTurnActions()
+        {
+            CharactersPanelsSwitcher.HideAllPanels();
+
+            if (_isPlayerTurn)
+            {
+                UnSubscribeOnTurn(CharacterInfoContainer.PlayerCharacters, CharacterInfoContainer.EnemyCharacters);
+            }
+            else
+            {
+                UnSubscribeOnTurn(CharacterInfoContainer.EnemyCharacters, CharacterInfoContainer.PlayerCharacters);
+            }
+
+            _isPlayerTurn = !_isPlayerTurn;
         }
 
         private void UnSubscribeOnTurn(List<CharacterInfo> shootingPlayer, List<CharacterInfo> targetPlayer) {

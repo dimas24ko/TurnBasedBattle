@@ -248,7 +248,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2096874378}
         m_TargetAssemblyTypeName: TurnBasedBattle.Scripts.Services.CharacterActionExecutor,
           TurnBasedBattle
-        m_MethodName: NewTurn
+        m_MethodName: PrepareNewTurn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
