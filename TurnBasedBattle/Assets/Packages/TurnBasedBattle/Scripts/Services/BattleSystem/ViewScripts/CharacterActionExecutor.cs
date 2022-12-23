@@ -184,6 +184,7 @@ namespace TurnBasedBattle.Scripts.Services.BattleSystem.ViewScripts {
                 : CharacterInfoContainer.EnemyCharacters);
 
             CharactersPanelsSwitcher.HidePanel(FirstCharacter.character.Type);
+
         }
 
         private void SetSideCharactersSelectable(List<CharacterInfo> sideCharacters) {
